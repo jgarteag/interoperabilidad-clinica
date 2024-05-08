@@ -125,6 +125,17 @@ class Disability(models.Model):
     def __str__(self):
         return self.name_dis
 
+class Borrows(models.Model):
+    code_borrow = models.CharField(max_length=12, primary_key=True)
+    name_borrow = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'borrows'
+
+    def __str__(self):
+        return self.name_borrow
+
 
 class Person(models.Model):
     SEX_BIO = [
@@ -153,7 +164,7 @@ class Person(models.Model):
 
     id_history = models.IntegerField(primary_key=True)
     country_origin = models.ForeignKey(Countries, on_delete=models.CASCADE, db_column='alfa_3')
-    doc_type = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    doc_type = models.ForeignKey(Typesdocs, on_delete=models.CASCADE, db_column='id_type')
     number_doc = models.IntegerField(max_length=20, min_length=3, blank=False, null=False)
     last_name = models.CharField(max_length=60, min_length=2, blank=False, null=False)
     surname = models.CharField(max_length=60, min_length=2, blank=False, null=False)
@@ -162,18 +173,18 @@ class Person(models.Model):
     date_born = models.DateField(max_length=16, min_length=10, blank=False, null=False)
     biologic_sex = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = SEX_BIO, default = '01')
     gender_identity = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = GEN_ID, default = '01')
-    occupation_care = models.CharField(max_length=4, min_length=4, blank=False, null=False)
+    occupation_care = models.ForeignKey(Occupations, on_delete=models.CASCADE, db_column='code_occ')
     opossition_donation = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = OPOSSITION, default = '01')
     date_opossition = models.DateField(max_length=10, min_length=10, blank=False, null=False)
     antiquated_will_document = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = OPOSSITION, default = '01')
     date_suscrip_ant_will_doc = models.DateField(max_length=10, min_length=10, blank=False, null=False)
     cod_borrower = models.CharField(max_length=12, min_length=12, blank=False, null=False)
-    category_disability = models.CharField(max_length=2, min_length=2, blank=False, null=False)
-    habitual_residence = models.CharField(max_length=3, min_length=3, blank=False, null=False)
-    municipality_of_hab_res = models.CharField(max_length=5, min_length=5, blank=False, null=False)
-    ethnicity = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    category_disability = models.ForeignKey(Disability, on_delete=models.CASCADE, db_column='id_dis')
+    habitual_residence = models.ForeignKey(Countries, on_delete=models.CASCADE, db_column='alfa_3')
+    municipality_of_hab_res = models.ForeignKey(Municipalities, on_delete=models.CASCADE, db_column='code_dep')
+    ethnicity = models.ForeignKey(Ethnicity, on_delete=models.CASCADE, db_column='id_et')
     territorial_zone = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = ZONE, default = '01')
-    eps = models.CharField(max_length=6, min_length=6, blank=False, null=False)
+    eps = models.ForeignKey(Eps, on_delete=models.CASCADE, db_column='code_eps')
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " " + self.surname + " " + self.middle_name 
@@ -209,18 +220,18 @@ class ContactWithHealthService(models.Model):
         ('03', 'Confirmado Repetido')
     ]
 
-    id_contact = models.IntegerField(primary_key=True)
-    cod_eps = models.CharField(max_length=12, min_length=12, blank=False, null=False)
+    id_history = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='id_history')
+    cod_borr = models.ForeignKey(Borrows, on_delete=models.CASCADE, db_column='code_borrow')
     date_start_attention = models.DateField(max_length=16, min_length=16, blank=False, null=False)
-    modality_of_realization_it = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.CASCADE, db_column='id_type')
     it_groups = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = GRP_SERVICES, default = '01')
     env_attention = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = ENV_ATT, default = '01')
-    way_of_entry = models.CharField(max_length=2, min_length=2, blank=False, null=False)
-    cause_of_care = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    way_of_entry = models.ForeignKey(Entrys, on_delete=models.CASCADE, db_column='id_type')
+    cause_of_care = models.ForeignKey(Causecare, on_delete=models.CASCADE, db_column='id_care')
     date_triage = models.DateField(max_length=16, min_length=16, blank=False, null=False)
     classification_triage = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = TRIAGE, default = '01')
-    diagnosis_of_admission = models.CharField(max_length=4, min_length=4, blank=False, null=False)
+    diagnosis_of_admission = models.ForeignKey(Illness, on_delete=models.CASCADE, db_column='cod_4')
     type_of_diagnosis = models.CharField(max_length=2, min_length=2, blank=False, null=False, choices = TYPES, default = '01')
 
     def __str__(self):
-        return self.cod_eps + " " + self.date_start_attention + " " + self.diagnosis_of_admission
+        return self.id_history

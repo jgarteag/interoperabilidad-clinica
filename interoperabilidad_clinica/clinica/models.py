@@ -28,3 +28,16 @@ class Person(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " " + self.surname + " " + self.middle_name 
+    
+class ContactWithHealthService(models.Model):
+    id_contact = models.IntegerField(primary_key=True)
+    cod_eps = models.CharField(max_length=12, min_length=12, blank=False, null=False)
+    date_start_attention = models.DateField(max_length=16, min_length=16, blank=False, null=False)
+    modality_of_realization_it = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    it_groups = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    env_attention = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    way_of_entry = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    cause_of_care = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    classification_triage = models.CharField(max_length=2, min_length=2, blank=False, null=False)
+    diagnosis_of_admission = models.CharField(max_length=4, min_length=4, blank=False, null=False)
+    type_of_diagnosis = models.CharField(max_length=2, min_length=2, blank=False, null=False)

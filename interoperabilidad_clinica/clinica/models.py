@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Typesdocs(models.Model):
-    id_type = models.CharField(max_length=2, primary_key=True)
+    id_typedoc = models.CharField(max_length=2, primary_key=True)
     doc_type = models.CharField(max_length=100)
 
     class Meta:
@@ -37,7 +37,7 @@ class Municipalities(models.Model):
         return self.name_dep
 
 class Modality(models.Model):
-    id_type = models.CharField(max_length=2, primary_key=True)
+    id_typemod = models.CharField(max_length=2, primary_key=True)
     description_modality = models.CharField(max_length=100)
 
     class Meta:
@@ -47,13 +47,13 @@ class Modality(models.Model):
     def __str__(self):
         return self.description_modality
     
-class Illness(models.Model):
+class Illnesses(models.Model):
     cod_4 = models.CharField(max_length=4, primary_key=True)
     des_illness = models.CharField(max_length=400)
 
     class Meta:
         managed = False
-        db_table = 'illness'
+        db_table = 'illnesses'
 
     def __str__(self):
         return self.des_illness
@@ -81,7 +81,7 @@ class Eps(models.Model):
         return self.name_eps
 
 class Entrys(models.Model):
-    id_type = models.AutoField(primary_key=True, max_length=2)
+    id_type_entrys = models.CharField(primary_key=True, max_length=2)
     entrys_names = models.CharField(max_length=200)
 
     class Meta:
@@ -163,9 +163,9 @@ class Person(models.Model):
     ]
 
     id_history = models.IntegerField(primary_key=True)
-    country_origin = models.ForeignKey(Countries, on_delete=models.CASCADE, db_column='alfa_3')
-    doc_type = models.ForeignKey(Typesdocs, on_delete=models.CASCADE, db_column='id_type')
-    number_doc = models.IntegerField(max_length=20, blank=False, null=False)
+    country_origin = models.ForeignKey(Countries, on_delete=models.CASCADE, related_name='persons_from_country')
+    doc_type = models.ForeignKey(Typesdocs, on_delete=models.CASCADE, db_column='id_typedoc')
+    number_doc = models.IntegerField(blank=False, null=False)
     last_name = models.CharField(max_length=60, blank=False, null=False)
     surname = models.CharField(max_length=60, blank=False, null=False)
     first_name = models.CharField(max_length=60, blank=False, null=False)
@@ -180,7 +180,7 @@ class Person(models.Model):
     date_suscrip_ant_will_doc = models.DateField(max_length=10, blank=False, null=False)
     cod_borrower = models.CharField(max_length=12, blank=False, null=False)
     category_disability = models.ForeignKey(Disability, on_delete=models.CASCADE, db_column='id_dis')
-    habitual_residence = models.ForeignKey(Countries, on_delete=models.CASCADE, db_column='alfa_3')
+    habitual_residence = models.ForeignKey(Countries, on_delete=models.CASCADE, related_name='persons_living_in_country')
     municipality_of_hab_res = models.ForeignKey(Municipalities, on_delete=models.CASCADE, db_column='code_dep')
     ethnicity = models.ForeignKey(Ethnicity, on_delete=models.CASCADE, db_column='id_et')
     territorial_zone = models.CharField(max_length=2, blank=False, null=False, choices = ZONE, default = '01')
@@ -223,14 +223,14 @@ class ContactWithHealthService(models.Model):
     id_history = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='id_history')
     cod_borr = models.ForeignKey(Borrows, on_delete=models.CASCADE, db_column='code_borrow')
     date_start_attention = models.DateField(max_length=16, blank=False, null=False)
-    modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.CASCADE, db_column='id_type')
+    modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.CASCADE, db_column='id_typemod')
     it_groups = models.CharField(max_length=2, blank=False, null=False, choices = GRP_SERVICES, default = '01')
     env_attention = models.CharField(max_length=2, blank=False, null=False, choices = ENV_ATT, default = '01')
-    way_of_entry = models.ForeignKey(Entrys, on_delete=models.CASCADE, db_column='id_type')
+    way_of_entry = models.ForeignKey(Entrys, on_delete=models.CASCADE, db_column='id_type_entrys')
     cause_of_care = models.ForeignKey(Causecare, on_delete=models.CASCADE, db_column='id_care')
     date_triage = models.DateField(max_length=16, blank=False, null=False)
     classification_triage = models.CharField(max_length=2, blank=False, null=False, choices = TRIAGE, default = '01')
-    diagnosis_of_admission = models.ForeignKey(Illness, on_delete=models.CASCADE, db_column='cod_4')
+    diagnosis_of_admission = models.ForeignKey(Illnesses, on_delete=models.CASCADE, db_column='cod_4')
     type_of_diagnosis = models.CharField(max_length=2, blank=False, null=False, choices = TYPES, default = '01')
 
     def __str__(self):

@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Models
 class Typesdocs(models.Model):
     id_typedoc = models.CharField(max_length=2, primary_key=True)
     doc_type = models.CharField(max_length=100)

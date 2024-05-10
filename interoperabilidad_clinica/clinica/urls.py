@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import IndexView, PacientView
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("pacient/", views.countries, name="pacient"),
+    path("", IndexView.as_view(), name="index"),
+    path("pacient/", PacientView.as_view(), name="pacient"),
 ]

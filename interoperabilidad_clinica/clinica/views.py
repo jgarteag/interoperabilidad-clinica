@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Countries, Typesdocs, Occupations
-from .forms import SexForm
+from .forms import SexForm, YesNoForm
 
 class IndexView(View):
     def get(self, request):
@@ -12,8 +12,10 @@ class PacientView(View):
         countries = Countries.objects.all()
         typesdocs = Typesdocs.objects.all()
         occupations = Occupations.objects.all()
-        form = SexForm()
+        sex_form = SexForm()
+        yes_no_form = YesNoForm()
         return render(request, 'pacient.html', {'countries': countries, 
                                                 'typesdocs': typesdocs,
-                                                'form': form,
-                                                'occupations': occupations})
+                                                'sex_form': sex_form,
+                                                'occupations': occupations,
+                                                'yes_no_form': yes_no_form})

@@ -3,12 +3,44 @@
 {% block title %}Paciente{% endblock %}
 
 {% block content %}
-    <h1>Paciente</h1>
+<h1>Paciente</h1>
+<form method="post">
+    {% csrf_token %}
     <label for="country">País de Nacionalidad:</label>
     <select id="country" name="country">
-        <option value="">Seleccione un país</option>
+        <option value="">--Seleccione un país--</option>
         {% for country in countries %}
-            <option value="{{ country.alfa_3 }}">{{ country.name_country }}</option>
+        <option value="{{ country.alfa_3 }}">{{ country.name_country }}</option>
         {% endfor %}
     </select>
+    <label for="doc_type">Tipo de documento:</label>
+    <select name="doc_type">
+        <option value="">--Tipo de documento--</option>
+        {% for type in typesdocs %}
+        <option value="{{ type.id_typedoc }}">{{ type.doc_type }}</option>
+        {% endfor %}
+    </select>
+    <label for="doc_number">Número de documento:</label>
+    <input type="text" id="doc_number" name="doc_number">
+    <label for="doc_number">Primer Apellido:</label>
+    <input type="text" id="last_name" name="last_name">
+    <label for="doc_number">Segundo Apellido:</label>
+    <input type="text" id="surname" name="surname">
+    <label for="doc_number">Primer Nombre:</label>
+    <input type="text" id="first_name" name="first_name">
+    <label for="doc_number">Segundo Nombre:</label>
+    <input type="text" id="middle_name" name="middle_name">
+    <label for="birth_date_time">Fecha y hora de nacimiento:</label>
+    <input type="datetime-local" id="birth_date_time" name="birth_date_time">
+    {{ form.as_p }}
+    <label for="occupation">Ocupación al momento de la atención:</label>
+    <select id="occupation" name="occupation">
+        <option value="">--Seleccione una ocupación--</option>
+        {% for occupation in occupations %}
+        <option value="{{ occupation.code_occ }}">{{ occupation.name_occ }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Registrar</button>
+</form>
 {% endblock %}

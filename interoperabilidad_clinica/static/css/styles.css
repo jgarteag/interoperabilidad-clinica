@@ -1,7 +1,110 @@
-h1 {
-    color: red;
-    font-size: 2em;
-    font-weight: bold;
+:root {
+    --color-primary: #3c3c3c; /* Un gris oscuro para textos principales */
+    --color-secondary: #0077cc; /* Un azul para elementos secundarios y enlaces */
+    --color-title: #242422; /* Negro para títulos */
+    --color-text: #4c4c4c; /* Un gris medio para texto regular */
+    --color-background: #ECF0F1; /* Un gris muy claro para el fondo */
+    --color-banner: #2C3E50;
+    --font-title: bebas;
+}
+
+.custom-paragraph {
+    font-family: bebas;
+    border: 2px solid black;
+    padding: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    margin-top: 70px; /* Ajusta este valor para mover el cuadro hacia abajo */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: var(--color-banner);
+}
+
+nav img {
+    margin: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul li {
+    padding: 20px;
+
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--color-background);
+    font-size: 25px;
+    font-weight: 700px;
+    font-family: var(--font-title);
+    transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: var(--color-title);
+}
+
+body {
+    background-color: var(--color-background);
     margin: 0;
     padding: 0;
+    user-select:auto;
+    cursor: default;
+}
+
+main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    min-height: 100px;
+    background-color: var(--color-banner);
+    font-family: var(--font-title);
+    color: var(--color-background);
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+h1 {
+    font-family: bebas;
+    margin-top: 50px;
+}
+
+@font-face {
+    font-family: bebas;
+    src: url(../fonts/bebas.ttf);
 }

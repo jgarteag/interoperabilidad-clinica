@@ -162,7 +162,7 @@ class Person(models.Model):
         ('02', 'Rural')
     ]
 
-    id_history = models.IntegerField(primary_key=True)
+    id_history = models.AutoField(primary_key=True)
     country_origin = models.ForeignKey(Countries, on_delete=models.CASCADE, related_name='persons_from_country')
     doc_type = models.ForeignKey(Typesdocs, on_delete=models.CASCADE, db_column='id_typedoc')
     number_doc = models.IntegerField(blank=False, null=False)

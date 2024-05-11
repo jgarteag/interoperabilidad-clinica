@@ -3,7 +3,7 @@ window.onload = function() {
     var oposDonationDate = document.getElementById('opossition_donation_date');
     var antiWillDoc = document.getElementById('antiquated_will_document');
     var antiWillDocDate = document.getElementById('antiquated_will_document_date');
-    var willDoc = document.getElementById('will_doc'); // Asegúrate de que este es el ID correcto
+    var willDoc = document.getElementById('will_doc');
 
     oposDonation.onchange = function() {
         var selectedText = this.options[this.selectedIndex].text;

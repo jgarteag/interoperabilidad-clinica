@@ -24,13 +24,13 @@
     </select>
     <label for="doc_number">Número de documento:</label>
     <input type="text" id="doc_number" name="doc_number">
-    <label for="doc_number">Primer Apellido:</label>
+    <label for="last_name">Primer Apellido:</label>
     <input type="text" id="last_name" name="last_name">
-    <label for="doc_number">Segundo Apellido:</label>
+    <label for="surname">Segundo Apellido:</label>
     <input type="text" id="surname" name="surname">
-    <label for="doc_number">Primer Nombre:</label>
+    <label for="first_name">Primer Nombre:</label>
     <input type="text" id="first_name" name="first_name">
-    <label for="doc_number">Segundo Nombre:</label>
+    <label for="middle_name">Segundo Nombre:</label>
     <input type="text" id="middle_name" name="middle_name">
     <label for="birth_date_time">Fecha y hora de nacimiento:</label>
     <input type="datetime-local" id="birth_date_time" name="birth_date_time">
@@ -43,6 +43,9 @@
         {% endfor %}
     </select>
     {{ yes_no_form.as_p }}
+    <label for="will_doc">Documento de voluntad anticipada</label>
+    <input type="text" id="will_doc" name="will_doc">
+
     <button type="submit">Registrar</button>
 </form>
 {% endblock %}

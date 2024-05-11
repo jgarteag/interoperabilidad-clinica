@@ -2,6 +2,11 @@
 
 {% load static %}
 
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
 {% block title %}Paciente{% endblock %}
 
 {% block content %}
@@ -45,6 +50,47 @@
     {{ yes_no_form.as_p }}
     <label for="will_doc">Documento de voluntad anticipada</label>
     <input type="text" id="will_doc" name="will_doc">
+
+    <label for="disability">Discapacidad:</label>
+    <select id="disability" name="disability">
+        <option value="">--Seleccione una discapacidad--</option>
+        {% for disability in category_disability %}
+        <option value="{{ disability.code_dis }}">{{ disability.name_dis }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="residence">País de Residencia:</label>
+    <select id="residence" name="residence">
+        <option value="">--Seleccione un país--</option>
+        {% for country in countries %}
+        <option value="{{ country.alfa_3 }}">{{ country.name_country }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="municipality">Municipio de residencia:</label>
+    <select id="municipality" name="municipality">
+        <option value="">--Seleccione un municipio--</option>
+        {% for municipality in municipality_of_hab_res %}
+        <option value="{{ municipality.code_mun }}">{{ municipality.name_dep }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="ethnic">Pertenencia Étnica</label>
+    <select id="ethnic" name="ethnic">
+        <option value="">--Seleccione un municipio--</option>
+        {% for ethnic in ethnicity %}
+        <option value="{{ ethnic.id_et }}">{{ ethnic.name_ethn }}</option>
+        {% endfor %}
+    </select>
+    {{ territorial_zone.as_p }}
+
+    <label for="Eps">Eps</label>
+    <select id="Eps" name="Eps">
+        <option value="">--Seleccione una Eps--</option>
+        {% for e in eps %}
+        <option value="{{ e.id_eps }}">{{ e.name_eps }}</option>
+        {% endfor %}
+    </select>
 
     <button type="submit">Registrar</button>
 </form>

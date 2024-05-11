@@ -18,3 +18,10 @@ class YesNoForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = ['opossition_donation', 'opossition_donation_date', 'antiquated_will_document', 'antiquated_will_document_date']
+
+class TerritorialZone(forms.ModelForm):
+    territorial_zone = forms.ChoiceField(choices=Person.ZONE, label="Zona de residencia")
+
+    class Meta:
+        model = Person
+        fields = ['territorial_zone']

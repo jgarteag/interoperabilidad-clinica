@@ -13,6 +13,6 @@ window.onload = function() {
     antiWillDoc.onchange = function() {
         var selectedText = this.options[this.selectedIndex].text;
         antiWillDocDate.disabled = (selectedText == 'Si') ? false : true;
-        willDoc.disabled = (selectedText == 'No') ? true : false; // Añade esta línea
+        willDoc.disabled = (selectedText == 'No') ? true : false;
     }
 }

@@ -12,7 +12,7 @@ class Typesdocs(models.Model):
         db_table = 'typesdocs'
 
     def __str__(self):
-        return self.doc_type
+        return f'{self.id_typedoc} - {self.doc_type}'
 
 class Occupations(models.Model):
     code_occ = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la ocupación')
@@ -23,7 +23,7 @@ class Occupations(models.Model):
         db_table = 'occupations'
 
     def __str__(self):
-        return self.name_occ
+        return f'{self.code_occ} - {self.name_occ}'
 
 class Municipalities(models.Model):
     departament = models.CharField(max_length=200, verbose_name='Departamento', null = False)
@@ -36,7 +36,7 @@ class Municipalities(models.Model):
         db_table = 'municipalities'
 
     def __str__(self):
-        return self.name_dep
+        return f'{self.code_dep} - {self.name_dep}'
 
 class Modality(models.Model):
     id_typemod = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la modalidad')
@@ -47,7 +47,7 @@ class Modality(models.Model):
         db_table = 'modality'
 
     def __str__(self):
-        return self.description_modality
+        return f'{self.id_typemod} - {self.description_modality}'
     
 class Illnesses(models.Model):
     cod_4 = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la enfermedad')
@@ -58,7 +58,7 @@ class Illnesses(models.Model):
         db_table = 'illnesses'
 
     def __str__(self):
-        return self.des_illness
+        return f'{self.cod_4} - {self.des_illness}'
 
 class Ethnicity(models.Model):
     id_et = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la etnia')
@@ -69,7 +69,7 @@ class Ethnicity(models.Model):
         db_table = 'ethnicity'
 
     def __str__(self):
-        return self.name_ethn
+        return f'{self.id_et} - {self.name_ethn}'
 
 class Eps(models.Model):
     code_eps = models.CharField(max_length=6, primary_key=True, verbose_name = 'Código de la EPS')
@@ -80,7 +80,7 @@ class Eps(models.Model):
         db_table = 'eps'
 
     def __str__(self):
-        return self.name_eps
+        return f'{self.code_eps} - {self.name_eps}'
 
 class Entrys(models.Model):
     id_type_entrys = models.CharField(primary_key=True, max_length=2, verbose_name = 'Código de la entrada')
@@ -91,7 +91,7 @@ class Entrys(models.Model):
         db_table = 'entrys'
 
     def __str__(self):
-        return self.name_entry
+        return f'{self.id_type_entrys} - {self.entrys_names}'
 
 class Countries(models.Model):
     alfa_3 = models.CharField(max_length=3, primary_key=True, verbose_name = 'Código de tres letras del país')
@@ -102,7 +102,7 @@ class Countries(models.Model):
         db_table = 'countries'
 
     def __str__(self):
-        return self.name_country
+        return f'{self.alfa_3} - {self.name_country}'
 
 class Causecare(models.Model):
     id_care = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la causa de atención')
@@ -113,7 +113,7 @@ class Causecare(models.Model):
         db_table = 'causecare'
 
     def __str__(self):
-        return self.type_care
+        return f'{self.id_care} - {self.type_care}'
 
 
 class Disability(models.Model):
@@ -125,7 +125,7 @@ class Disability(models.Model):
         db_table = 'disability'
 
     def __str__(self):
-        return self.name_dis
+        return f'{self.id_dis} - {self.name_dis}'
 
 class Borrows(models.Model):
     code_borrow = models.CharField(max_length=12, primary_key=True, verbose_name = 'Código prestadores')
@@ -136,7 +136,7 @@ class Borrows(models.Model):
         db_table = 'borrows'
 
     def __str__(self):
-        return self.name_borrow
+        return f'{self.code_borrow} - {self.name_borrow}'
 
 
 class Person(models.Model):

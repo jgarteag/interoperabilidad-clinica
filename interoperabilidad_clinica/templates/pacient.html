@@ -12,7 +12,11 @@
 {% block content %}
 <h1>Paciente</h1>
 <form method="post">
-    {{ form.as_p }}
+    {% csrf_token %}
+    <h2>Formulario de Paciente</h2>
+    {{ pacient_form.as_p }}
+    <h2>Formulario de Contacto con el Servicio de Salud</h2>
+    {{ contact_form.as_p }}
     <button type="submit">Crear Paciente</button> 
 </form>
 {% endblock %}

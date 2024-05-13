@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Countries, Typesdocs, Occupations, Disability, Municipalities, Ethnicity, Eps
 
 from .forms import *
 
@@ -10,11 +9,14 @@ class IndexView(View):
 
 def create_pacient(request):
     if request.method == 'POST':
-        form = PacientForm(request.POST)
-        if form.is_valid():
-            form.save()
+        pacient_form = PacientForm(request.POST)
+        contact_form = ContactForm(request.POST)
+        if pacient_form.is_valid() and contact_form.is_valid():
+            pacient_form.save()
+            contact_form.save()
             return redirect('pacient')
     else:
-        form = PacientForm()
+        pacient_form = PacientForm()
+        contact_form = ContactForm()
 
-    return render(request, 'pacient.html', {'form': form})
+    return render(request, 'pacient.html', {'pacient_form': pacient_form, 'contact_form': contact_form})

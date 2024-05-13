@@ -180,7 +180,7 @@ class Person(models.Model):
     date_opossition = models.DateField(auto_now=True, verbose_name = 'Fecha de oposición a la donación') #automatico
     antiquated_will_document = models.CharField(max_length=2, blank=False, null=False, choices = OPOSSITION, default = '01')
     date_suscrip_ant_will_doc = models.DateField(auto_now=True, verbose_name='Fecha de suscripción del documento de voluntad anticipada') #automatico
-    cod_borrower = models.ForeignKey(Borrows, on_delete=models.PROTECT, verbose_name='Código del prestador')
+
     category_disability = models.ForeignKey(Disability, on_delete=models.PROTECT, verbose_name='Categoría de discapacidad')
     habitual_residence = models.ForeignKey(Countries, on_delete=models.PROTECT, verbose_name= 'País de residencia habitual', related_name='residence_country')
     municipality_of_hab_res = models.ForeignKey(Municipalities, on_delete=models.PROTECT, verbose_name='Municipio de residencia habitual')
@@ -231,7 +231,7 @@ class ContactWithHealthService(models.Model):
     ]
 
     id_contact = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True, db_column='id_history', verbose_name = 'Código de contacto', related_name='contact', default=0)
-    cod_borr = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='cod_borrower', verbose_name = 'Código del prestador', related_name='borrowers')
+    cod_borr = models.ForeignKey(Borrows, on_delete=models.PROTECT, verbose_name='Código del prestador')
     date_start_attention = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de inicio de atención') #automatico
     modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.PROTECT, verbose_name='Modalidad de realización de la atención')
     it_groups = models.CharField('Grupo de servicios', max_length=2, choices = GRP_SERVICES, default = '01')

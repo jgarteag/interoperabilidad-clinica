@@ -1,9 +1,11 @@
 from django.db import models
+from django.core.validators import RegexValidator
+import uuid
 
-# Models
+# Create your models here.
 class Typesdocs(models.Model):
-    id_typedoc = models.CharField(max_length=2, primary_key=True)
-    doc_type = models.CharField(max_length=100)
+    id_typedoc = models.CharField(verbose_name = 'Código del tipo de documento', max_length=2, primary_key=True)
+    doc_type = models.CharField(verbose_name = 'Descripción', max_length=100, unique = True, null = False)
 
     class Meta:
         managed = False
@@ -13,8 +15,8 @@ class Typesdocs(models.Model):
         return self.doc_type
 
 class Occupations(models.Model):
-    code_occ = models.CharField(max_length=4, primary_key=True)
-    name_occ = models.CharField(max_length=200)
+    code_occ = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la ocupación')
+    name_occ = models.CharField(max_length=200, verbose_name = 'Nombre de la ocupación', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -24,10 +26,10 @@ class Occupations(models.Model):
         return self.name_occ
 
 class Municipalities(models.Model):
-    departament = models.CharField(max_length=200)
-    code_dep = models.CharField(primary_key=True, max_length=5)
-    name_dep = models.CharField(max_length=200)
-    type_mnc = models.CharField(max_length=200)
+    departament = models.CharField(max_length=200, verbose_name='Departamento', null = False)
+    code_dep = models.CharField(primary_key=True, max_length=5, verbose_name='Código del municipio', null = False)
+    name_dep = models.CharField(max_length=200, verbose_name='Nombre del municipio', null = False)
+    type_mnc = models.CharField(max_length=200, verbose_name='Tipo de municipio', null = False)
 
     class Meta:
         managed = False
@@ -37,8 +39,8 @@ class Municipalities(models.Model):
         return self.name_dep
 
 class Modality(models.Model):
-    id_typemod = models.CharField(max_length=2, primary_key=True)
-    description_modality = models.CharField(max_length=100)
+    id_typemod = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la modalidad')
+    description_modality = models.CharField(max_length=100, verbose_name = 'Descripción de la modalidad', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -48,8 +50,8 @@ class Modality(models.Model):
         return self.description_modality
     
 class Illnesses(models.Model):
-    cod_4 = models.CharField(max_length=4, primary_key=True)
-    des_illness = models.CharField(max_length=400)
+    cod_4 = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la enfermedad')
+    des_illness = models.CharField(max_length=400, verbose_name = 'Descripción de la enfermedad', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -59,8 +61,8 @@ class Illnesses(models.Model):
         return self.des_illness
 
 class Ethnicity(models.Model):
-    id_et = models.CharField(max_length=2, primary_key=True)
-    name_ethn = models.CharField(max_length=200)
+    id_et = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la etnia')
+    name_ethn = models.CharField(max_length=200, verbose_name = 'Nombre de la etnia', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -70,8 +72,8 @@ class Ethnicity(models.Model):
         return self.name_ethn
 
 class Eps(models.Model):
-    code_eps = models.CharField(max_length=6, primary_key=True)
-    name_eps = models.CharField(max_length=200)
+    code_eps = models.CharField(max_length=6, primary_key=True, verbose_name = 'Código de la EPS')
+    name_eps = models.CharField(max_length=200, verbose_name = 'Nombre de la EPS', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -81,8 +83,8 @@ class Eps(models.Model):
         return self.name_eps
 
 class Entrys(models.Model):
-    id_type_entrys = models.CharField(primary_key=True, max_length=2)
-    entrys_names = models.CharField(max_length=200)
+    id_type_entrys = models.CharField(primary_key=True, max_length=2, verbose_name = 'Código de la entrada')
+    entrys_names = models.CharField(max_length=200, verbose_name = 'Nombre de la entrada', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -92,8 +94,8 @@ class Entrys(models.Model):
         return self.name_entry
 
 class Countries(models.Model):
-    alfa_3 = models.CharField(max_length=3, primary_key=True)
-    name_country = models.CharField(max_length=200)
+    alfa_3 = models.CharField(max_length=3, primary_key=True, verbose_name = 'Código de tres letras del país')
+    name_country = models.CharField(max_length=200, verbose_name = 'Nombre del país', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -103,8 +105,8 @@ class Countries(models.Model):
         return self.name_country
 
 class Causecare(models.Model):
-    id_care = models.CharField(max_length=2, primary_key=True)
-    type_care = models.CharField(max_length=50)
+    id_care = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la causa de atención')
+    type_care = models.CharField(max_length=50, verbose_name = 'Tipo de atención', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -115,8 +117,8 @@ class Causecare(models.Model):
 
 
 class Disability(models.Model):
-    id_dis = models.CharField(max_length=2, primary_key=True)
-    name_dis = models.CharField(max_length=50)
+    id_dis = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la discapacidad')
+    name_dis = models.CharField(max_length=50, verbose_name = 'Nombre de la discapacidad', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -126,8 +128,8 @@ class Disability(models.Model):
         return self.name_dis
 
 class Borrows(models.Model):
-    code_borrow = models.CharField(max_length=12, primary_key=True)
-    name_borrow = models.CharField(max_length=200)
+    code_borrow = models.CharField(max_length=12, primary_key=True, verbose_name = 'Código prestadores')
+    name_borrow = models.CharField(max_length=200, verbose_name = 'Nombre del prestador', unique = True, null = False)
 
     class Meta:
         managed = False
@@ -162,32 +164,40 @@ class Person(models.Model):
         ('02', 'Rural')
     ]
 
-    id_history = models.AutoField(primary_key=True)
-    country_origin = models.ForeignKey(Countries, on_delete=models.CASCADE, related_name='persons_from_country')
-    doc_type = models.ForeignKey(Typesdocs, on_delete=models.CASCADE, db_column='id_typedoc')
-    number_doc = models.IntegerField(blank=False, null=False)
-    last_name = models.CharField(max_length=60, blank=False, null=False)
-    surname = models.CharField(max_length=60, blank=False, null=False)
-    first_name = models.CharField(max_length=60, blank=False, null=False)
-    middle_name = models.CharField(max_length=60, blank=False, null=False)
-    date_born = models.DateField(max_length=16, blank=False, null=False)
-    biologic_sex = models.CharField(max_length=2, blank=False, null=False, choices = SEX_BIO, default = '01')
-    gender_identity = models.CharField(max_length=2, blank=False, null=False, choices = GEN_ID, default = '01')
-    occupation_care = models.ForeignKey(Occupations, on_delete=models.CASCADE, db_column='code_occ')
-    opossition_donation = models.CharField(max_length=2, blank=False, null=False, choices = OPOSSITION, default = '01')
-    date_opossition = models.DateField(max_length=10, blank=False, null=False)
+    id_history = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    country_origin = models.ForeignKey(Countries, on_delete = models.PROTECT, verbose_name = 'País de origen', related_name='origin_country')
+    doc_type = models.ForeignKey(Typesdocs, on_delete = models.PROTECT, verbose_name = 'Tipo de documento')
+    number_doc = models.CharField(max_length=20, blank=False, null=False, validators=[RegexValidator(regex='^[0-9]*$', message='Solo se permiten números')], verbose_name = 'Número de documento persona')
+    last_name = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Primer apellido')
+    surname = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Segundo apellido')
+    first_name = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Primer nombre')
+    middle_name = models.CharField(max_length=60, null=False, verbose_name = 'Segundo nombre', default = '')
+    date_born = models.DateTimeField(blank=False, null=False, verbose_name = 'Fecha de nacimiento')
+    biologic_sex = models.CharField(max_length=2, choices = SEX_BIO, default = '01', verbose_name = 'Sexo biológico')
+    gender_identity = models.CharField(max_length=2, choices = GEN_ID, default = '01', verbose_name = 'Identidad de género')
+    occupation_care = models.ForeignKey(Occupations, on_delete=models.PROTECT, verbose_name='Ocupación')
+    opossition_donation = models.CharField(max_length=2, choices = OPOSSITION, default = '01', verbose_name = 'Oposición legal de donación')
+    date_opossition = models.DateField(auto_now=True, verbose_name = 'Fecha de oposición a la donación') #automatico
     antiquated_will_document = models.CharField(max_length=2, blank=False, null=False, choices = OPOSSITION, default = '01')
-    date_suscrip_ant_will_doc = models.DateField(max_length=10, blank=False, null=False)
-    cod_borrower = models.CharField(max_length=12, blank=False, null=False)
-    category_disability = models.ForeignKey(Disability, on_delete=models.CASCADE, db_column='id_dis')
-    habitual_residence = models.ForeignKey(Countries, on_delete=models.CASCADE, related_name='persons_living_in_country')
-    municipality_of_hab_res = models.ForeignKey(Municipalities, on_delete=models.CASCADE, db_column='code_dep')
-    ethnicity = models.ForeignKey(Ethnicity, on_delete=models.CASCADE, db_column='id_et')
-    territorial_zone = models.CharField(max_length=2, blank=False, null=False, choices = ZONE, default = '01')
-    eps = models.ForeignKey(Eps, on_delete=models.CASCADE, db_column='code_eps')
+    date_suscrip_ant_will_doc = models.DateField(auto_now=True, verbose_name='Fecha de suscripción del documento de voluntad anticipada') #automatico
+    cod_borrower = models.ForeignKey(Borrows, on_delete=models.PROTECT, verbose_name='Código del prestador')
+    category_disability = models.ForeignKey(Disability, on_delete=models.PROTECT, verbose_name='Categoría de discapacidad')
+    habitual_residence = models.ForeignKey(Countries, on_delete=models.PROTECT, verbose_name= 'País de residencia habitual', related_name='residence_country')
+    municipality_of_hab_res = models.ForeignKey(Municipalities, on_delete=models.PROTECT, verbose_name='Municipio de residencia habitual')
+    ethnicity = models.ForeignKey(Ethnicity, on_delete=models.PROTECT, verbose_name='Etnia')
+    territorial_zone = models.CharField(max_length=2, choices = ZONE, default = '01', verbose_name='Zona de residencia')
+    eps = models.ForeignKey(Eps, on_delete=models.PROTECT, verbose_name='EPS')
+
+    class Meta:
+        db_table = 'person'
+        verbose_name = 'Persona'
+        verbose_name_plural = 'Personas'
+        constraints = [
+            models.UniqueConstraint(fields=['doc_type', 'number_doc'], name='UQ_DOCUMENT_TYPE_IDENTITY_CARD')
+        ]
 
     def __str__(self):
-        return self.first_name + " " + self.last_name + " " + self.surname + " " + self.middle_name 
+        return f'{self.doc_type} - {self.number_doc}'.strip()
     
 class ContactWithHealthService(models.Model):
     GRP_SERVICES = [
@@ -220,18 +230,26 @@ class ContactWithHealthService(models.Model):
         ('03', 'Confirmado Repetido')
     ]
 
-    id_history = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='id_history')
-    cod_borr = models.ForeignKey(Borrows, on_delete=models.CASCADE, db_column='code_borrow')
-    date_start_attention = models.DateField(max_length=16, blank=False, null=False)
-    modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.CASCADE, db_column='id_typemod')
-    it_groups = models.CharField(max_length=2, blank=False, null=False, choices = GRP_SERVICES, default = '01')
-    env_attention = models.CharField(max_length=2, blank=False, null=False, choices = ENV_ATT, default = '01')
-    way_of_entry = models.ForeignKey(Entrys, on_delete=models.CASCADE, db_column='id_type_entrys')
-    cause_of_care = models.ForeignKey(Causecare, on_delete=models.CASCADE, db_column='id_care')
-    date_triage = models.DateField(max_length=16, blank=False, null=False)
-    classification_triage = models.CharField(max_length=2, blank=False, null=False, choices = TRIAGE, default = '01')
-    diagnosis_of_admission = models.ForeignKey(Illnesses, on_delete=models.CASCADE, db_column='cod_4')
-    type_of_diagnosis = models.CharField(max_length=2, blank=False, null=False, choices = TYPES, default = '01')
+    id_contact = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True, db_column='id_history', verbose_name = 'Código de contacto', related_name='contact', default=0)
+    cod_borr = models.ForeignKey(Person, on_delete=models.CASCADE, db_column='cod_borrower', verbose_name = 'Código del prestador', related_name='borrowers')
+    date_start_attention = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de inicio de atención') #automatico
+    modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.PROTECT, verbose_name='Modalidad de realización de la atención')
+    it_groups = models.CharField('Grupo de servicios', max_length=2, choices = GRP_SERVICES, default = '01')
+    env_attention = models.CharField('Entorno de atención', max_length=2, choices = ENV_ATT, default = '01')
+    way_of_entry = models.ForeignKey(Entrys, on_delete=models.PROTECT, verbose_name='Vía de ingreso')
+    cause_of_care = models.ForeignKey(Causecare, on_delete=models.PROTECT, verbose_name='Causa de atención')
+    date_triage = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de triage') #automatico
+    classification_triage = models.CharField('Clasificación de triage', max_length=2, choices = TRIAGE, default = '01')
+    diagnosis_of_admission = models.ForeignKey(Illnesses, on_delete=models.PROTECT, verbose_name='Diagnóstico de ingreso')
+    type_of_diagnosis = models.CharField('Tipo de diagnóstico', max_length=2, choices = TYPES, default = '01')
+
+    class Meta:
+        db_table = 'contact'
+        verbose_name = 'Contacto con el servicio de salud'
+        verbose_name_plural = 'Contacts'
+        constraints = [
+            models.UniqueConstraint(fields=['id_contact', 'date_start_attention'], name='UQ_ID_CONTACT_DATE_ATTENTION')
+        ]
 
     def __str__(self):
-        return self.id_history
+        return f'{self.id_contact} - {self.date_start_attention}'.strip()

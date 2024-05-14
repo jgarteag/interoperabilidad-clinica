@@ -11,10 +11,13 @@ def create_pacient(request):
     if request.method == 'POST':
         pacient_form = PacientForm(request.POST)
         contact_form = ContactForm(request.POST)
-        if pacient_form.is_valid() and contact_form.is_valid():
-            pacient_form.save()
-            contact_form.save()
-            return redirect('pacient')
+        if pacient_form.is_valid():
+            pacient = pacient_form.save()
+            if contact_form.is_valid():
+                contact = contact_form.save(commit=False)
+                contact.id_contact = pacient
+                contact.save()
+                return redirect('pacient')
     else:
         pacient_form = PacientForm()
         contact_form = ContactForm()

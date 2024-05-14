@@ -164,7 +164,7 @@ class Person(models.Model):
         ('02', 'Rural')
     ]
 
-    id_history = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    id_history = models.AutoField(primary_key=True, verbose_name = 'Código de historia clínica')
     country_origin = models.ForeignKey(Countries, on_delete = models.PROTECT, verbose_name = 'País de origen', related_name='origin_country')
     doc_type = models.ForeignKey(Typesdocs, on_delete = models.PROTECT, verbose_name = 'Tipo de documento')
     number_doc = models.CharField(max_length=20, blank=False, null=False, validators=[RegexValidator(regex='^[0-9]*$', message='Solo se permiten números')], verbose_name = 'Número de documento persona')
@@ -230,7 +230,7 @@ class ContactWithHealthService(models.Model):
         ('03', 'Confirmado Repetido')
     ]
 
-    id_contact = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True, db_column='id_history', verbose_name = 'Código de contacto', related_name='contact', default=0)
+    id_contact = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True, related_name='id_contact')
     cod_borr = models.ForeignKey(Borrows, on_delete=models.PROTECT, verbose_name='Código del prestador')
     date_start_attention = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de inicio de atención') #automatico
     modality_of_realization_it = models.ForeignKey(Modality, on_delete=models.PROTECT, verbose_name='Modalidad de realización de la atención')

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Person, ContactWithHealthService
+from datetime import datetime
 
 
 class PacientForm(forms.ModelForm):
@@ -48,35 +49,56 @@ class PacientForm(forms.ModelForm):
                     'id': 'identity',
                     'class': 'form-control',
                     'placeholder' : 'Número de documento',
+                    'minlength': '3',
+                    'maxlength': '20',
+                    'pattern': '\d*',
+                    'title': 'Solo se permiten números',
                 }
             ),
             'last_name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Guerrero',
+                    'minlength': '2',
+                    'maxlength': '60',
+                    'pattern': '[A-Za-z]*',
+                    'title': 'Solo se permiten letras'
                 }
             ),
             'surname': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Arteaga',
+                    'minlength': '2',
+                    'maxlength': '60',
+                    'pattern': '[A-Za-z]*',
+                    'title': 'Solo se permiten letras'
                 }
             ),
             'first_name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Juan',
+                    'minlength': '2',
+                    'maxlength': '60',
+                    'pattern': '[A-Za-z]*',
+                    'title': 'Solo se permiten letras'
                 }
             ),
             'middle_name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                    'minlength': '2',
+                    'maxlength': '60',
+                    'pattern': '[A-Za-z]*',
+                    'title': 'Solo se permiten letras'
                 }
             ),
             'date_born': forms.DateTimeInput(
                 attrs={
                     'class': 'form-control',
                     'type': 'datetime-local',
+                    'max': datetime.now().strftime('%Y-%m-%dT%H:%M')
                 }
             ),
             'biologic_sex': forms.Select(

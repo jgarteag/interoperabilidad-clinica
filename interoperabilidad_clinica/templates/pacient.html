@@ -4,19 +4,35 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 {% endblock %}
 
 {% block title %}Paciente{% endblock %}
 
 {% block content %}
-<h1>Paciente</h1>
-<form method="post">
-    {% csrf_token %}
-    <h2>Formulario de Paciente</h2>
-    {{ pacient_form.as_p }}
-    <h2>Formulario de Contacto con el Servicio de Salud</h2>
-    {{ contact_form.as_p }}
-    <button type="submit">Crear Paciente</button> 
-</form>
+<div class="container mb-5">
+    <h1 class="text-center my-4">Paciente</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Formulario de Paciente</h2>
+            </div>
+            <div class="card-body">
+                {{ pacient_form.as_p }}
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Formulario de Contacto con el Servicio de Salud</h2>
+            </div>
+            <div class="card-body">
+                {{ contact_form.as_p }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Paciente</button> 
+    </form>
+</div>
+{% include 'layouts/partials/footer.html' %}
 {% endblock %}

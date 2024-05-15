@@ -1,8 +1,19 @@
 {% load static %}
-<nav class="">
-    <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo" width="125">
-    <ul>
-        <li class=""><a href="{% url 'index' %}"><span>Inicio</span></a></li>
-        <li><a href="{% url 'pacient' %}"><span>Paciente</span></a></li>   
-    </ul>
-</nav>
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <a href="{% url 'index' %}" class="nav-link active">
+            <img src="{% static 'img/log_harmony.png' %}" alt="Logo" class="logo" width="100">
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'pacient' %}">Paciente</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+{% endblock %}

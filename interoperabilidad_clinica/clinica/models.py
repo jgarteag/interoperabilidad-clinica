@@ -171,7 +171,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Primer apellido')
     surname = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Segundo apellido')
     first_name = models.CharField(max_length=60, blank=False, null=False, verbose_name = 'Primer nombre')
-    middle_name = models.CharField(max_length=60, null=False, verbose_name = 'Segundo nombre', default = '')
+    middle_name = models.CharField(max_length=60, null=True, blank=True, verbose_name = 'Segundo nombre', default = '')
     date_born = models.DateTimeField(blank=False, null=False, verbose_name = 'Fecha de nacimiento')
     biologic_sex = models.CharField(max_length=2, choices = SEX_BIO, default = '01', verbose_name = 'Sexo biológico')
     gender_identity = models.CharField(max_length=2, choices = GEN_ID, default = '01', verbose_name = 'Identidad de género')

@@ -17,7 +17,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" width="50" />
 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" width="50" />
 
-## Authors
+## Author
 
 - [juanmgart92](https://github.com/juanmgart92)
 

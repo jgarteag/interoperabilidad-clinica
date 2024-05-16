@@ -39,3 +39,13 @@ img:hover {
 .navbar .navbar-nav .nav-link {
     font-size: 1.2em;
 }
+
+.card {
+    background-color: #ECF0F1;
+    transition: all 0.3s ease;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}

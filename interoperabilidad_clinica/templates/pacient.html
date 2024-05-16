@@ -6,6 +6,11 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #F4F6F6;
+        }
+    </style>
 {% endblock %}
 
 {% block title %}Paciente{% endblock %}
@@ -31,8 +36,9 @@
                 {{ contact_form.as_p }}
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button> 
+        <button type="submit" class="btn btn-success">
+            <img src="{% static 'img/save.png' %}" alt="Guardar" style="width: 40px; height: 40px;">
+        </button> 
     </form>
 </div>
-{% include 'layouts/partials/footer.html' %}
 {% endblock %}

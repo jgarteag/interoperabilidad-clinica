@@ -9,6 +9,13 @@ class IndexView(View):
     """
     def get(self, request):
         return render(request, 'index.html', {})
+    
+class PageNotFoundView(View):
+    """
+    Clase para renderizar la página de error 404
+    """
+    def get(self, request):
+        return render(request, '404.html', {})
 
 def create_pacient(request):
     """
@@ -34,8 +41,12 @@ def edit_patient(request, id):
     """
     Función para editar un paciente
     """
-    pacient = Person.objects.get(id_history=id)
-    contact = ContactWithHealthService.objects.get(id_contact=id)
+    try:
+        pacient = Person.objects.get(id_history=id)
+        contact = ContactWithHealthService.objects.get(id_contact=id)
+    except (Person.DoesNotExist, ContactWithHealthService.DoesNotExist):
+        return redirect('not_found')
+
     if request.method == 'GET':
         pacient_form = PacientForm(instance=pacient)
         contact_form = ContactForm(instance=contact)

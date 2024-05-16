@@ -1,0 +1,11 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}Página no encontrada{% endblock %}
+
+{% block content %}
+<div class="container text-center"><a href="{% url 'index' %}">
+        <img src="{% static 'img/notfound.png' %}" alt="Página no encontrada" class="img-fluid smaller-image">
+    </a>
+</div>
+{% endblock %}

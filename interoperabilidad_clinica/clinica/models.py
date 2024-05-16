@@ -1,9 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
-import uuid
 
 # Create your models here.
 class Typesdocs(models.Model):
+    """
+    Clase que representa el tipo de documento de identificación de una persona.
+    """
     id_typedoc = models.CharField(verbose_name = 'Código del tipo de documento', max_length=2, primary_key=True)
     doc_type = models.CharField(verbose_name = 'Descripción', max_length=100, unique = True, null = False)
 
@@ -15,6 +17,9 @@ class Typesdocs(models.Model):
         return f'{self.id_typedoc} - {self.doc_type}'
 
 class Occupations(models.Model):
+    """
+    Clase que representa la ocupación de una persona.
+    """
     code_occ = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la ocupación')
     name_occ = models.CharField(max_length=200, verbose_name = 'Nombre de la ocupación', unique = True, null = False)
 
@@ -26,6 +31,9 @@ class Occupations(models.Model):
         return f'{self.code_occ} - {self.name_occ}'
 
 class Municipalities(models.Model):
+    """
+    Clase que representa los municipios de un departamento.
+    """
     departament = models.CharField(max_length=200, verbose_name='Departamento', null = False)
     code_dep = models.CharField(primary_key=True, max_length=5, verbose_name='Código del municipio', null = False)
     name_dep = models.CharField(max_length=200, verbose_name='Nombre del municipio', null = False)
@@ -39,6 +47,9 @@ class Municipalities(models.Model):
         return f'{self.code_dep} - {self.name_dep}'
 
 class Modality(models.Model):
+    """
+    Clase que representa la modalidad de atención de un paciente.
+    """
     id_typemod = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la modalidad')
     description_modality = models.CharField(max_length=100, verbose_name = 'Descripción de la modalidad', unique = True, null = False)
 
@@ -50,6 +61,9 @@ class Modality(models.Model):
         return f'{self.id_typemod} - {self.description_modality}'
     
 class Illnesses(models.Model):
+    """
+    Clase que representa las enfermedades de un paciente.
+    """
     cod_4 = models.CharField(max_length=4, primary_key=True, verbose_name = 'Código de la enfermedad')
     des_illness = models.CharField(max_length=400, verbose_name = 'Descripción de la enfermedad', unique = True, null = False)
 
@@ -61,6 +75,9 @@ class Illnesses(models.Model):
         return f'{self.cod_4} - {self.des_illness}'
 
 class Ethnicity(models.Model):
+    """
+    Clase que representa la etnia de una persona.
+    """
     id_et = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la etnia')
     name_ethn = models.CharField(max_length=200, verbose_name = 'Nombre de la etnia', unique = True, null = False)
 
@@ -72,6 +89,9 @@ class Ethnicity(models.Model):
         return f'{self.id_et} - {self.name_ethn}'
 
 class Eps(models.Model):
+    """
+    Clase que representa la EPS de una persona.
+    """
     code_eps = models.CharField(max_length=6, primary_key=True, verbose_name = 'Código de la EPS')
     name_eps = models.CharField(max_length=200, verbose_name = 'Nombre de la EPS', unique = True, null = False)
 
@@ -83,6 +103,9 @@ class Eps(models.Model):
         return f'{self.code_eps} - {self.name_eps}'
 
 class Entrys(models.Model):
+    """
+    Clase que representa la entrada de un paciente a un centro de salud.
+    """
     id_type_entrys = models.CharField(primary_key=True, max_length=2, verbose_name = 'Código de la entrada')
     entrys_names = models.CharField(max_length=200, verbose_name = 'Nombre de la entrada', unique = True, null = False)
 
@@ -94,6 +117,10 @@ class Entrys(models.Model):
         return f'{self.id_type_entrys} - {self.entrys_names}'
 
 class Countries(models.Model):
+    """
+    Clase que representa los países.
+    segun ISO 3166-1 alpha-3
+    """
     alfa_3 = models.CharField(max_length=3, primary_key=True, verbose_name = 'Código de tres letras del país')
     name_country = models.CharField(max_length=200, verbose_name = 'Nombre del país', unique = True, null = False)
 
@@ -105,6 +132,9 @@ class Countries(models.Model):
         return f'{self.alfa_3} - {self.name_country}'
 
 class Causecare(models.Model):
+    """
+    Clase que representa la causa de atención de un paciente.
+    """
     id_care = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la causa de atención')
     type_care = models.CharField(max_length=50, verbose_name = 'Tipo de atención', unique = True, null = False)
 
@@ -117,6 +147,9 @@ class Causecare(models.Model):
 
 
 class Disability(models.Model):
+    """
+    Clase que representa la discapacidad de una persona.
+    """
     id_dis = models.CharField(max_length=2, primary_key=True, verbose_name = 'Código de la discapacidad')
     name_dis = models.CharField(max_length=50, verbose_name = 'Nombre de la discapacidad', unique = True, null = False)
 
@@ -128,6 +161,9 @@ class Disability(models.Model):
         return f'{self.id_dis} - {self.name_dis}'
 
 class Borrows(models.Model):
+    """
+    Clase que representa los prestadores de salud.
+    """
     code_borrow = models.CharField(max_length=12, primary_key=True, verbose_name = 'Código prestadores')
     name_borrow = models.CharField(max_length=200, verbose_name = 'Nombre del prestador', unique = True, null = False)
 
@@ -140,6 +176,9 @@ class Borrows(models.Model):
 
 
 class Person(models.Model):
+    """
+    Clase que representa a una persona.
+    """
     SEX_BIO = [
         ('01', 'Hombre'),
         ('02', 'Mujer'),
@@ -200,6 +239,9 @@ class Person(models.Model):
         return f'{self.doc_type} - {self.number_doc}'.strip()
     
 class ContactWithHealthService(models.Model):
+    """
+    Clase que representa el contacto de una persona con un servicio de salud.
+    """
     GRP_SERVICES = [
         ('01', 'Consulta Externa'),
         ('02', 'Apoyo Diagnostico y Complementacion Terapeutica'), 

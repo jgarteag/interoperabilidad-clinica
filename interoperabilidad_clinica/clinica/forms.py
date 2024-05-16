@@ -4,6 +4,9 @@ from datetime import datetime
 
 
 class PacientForm(forms.ModelForm):
+    """
+    Formulario para el registro de un paciente
+    """
     class Meta:
         model = Person
         fields = [
@@ -159,6 +162,9 @@ class PacientForm(forms.ModelForm):
         }
 
 class ContactForm(forms.ModelForm):
+    """
+    Formulario para el registro de un contacto con los servicios de salud
+    """
     class Meta:
         model = ContactWithHealthService
         fields = [

@@ -4,10 +4,16 @@ from .models import *
 from .forms import *
 
 class IndexView(View):
+    """
+    Clase para renderizar la página de inicio
+    """
     def get(self, request):
         return render(request, 'index.html', {})
 
 def create_pacient(request):
+    """
+    Función para crear un paciente
+    """
     if request.method == 'POST':
         pacient_form = PacientForm(request.POST)
         contact_form = ContactForm(request.POST)
@@ -25,6 +31,9 @@ def create_pacient(request):
     return render(request, 'pacient.html', {'pacient_form': pacient_form, 'contact_form': contact_form})
 
 def edit_patient(request, id):
+    """
+    Función para editar un paciente
+    """
     pacient = Person.objects.get(id_history=id)
     contact = ContactWithHealthService.objects.get(id_contact=id)
     if request.method == 'GET':
